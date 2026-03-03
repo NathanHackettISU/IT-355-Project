@@ -1,0 +1,12 @@
+{
+  "userId" : "JoeyPina9202Jpina",
+  "username" : "Jpina",
+  "firstName" : "Joey",
+  "lastName" : "Pina",
+  "email" : "jt.pina2002@gmail.com",
+  "dob" : [ 2002, 9, 29 ],
+  "password" : "test",
+  "ssn" : "123456789",
+  "pin" : "1111",
+  "accounts" : [ ]
+}

@@ -1,34 +1,26 @@
 import java.util.Scanner;
 
 public class LoginService {
-
+    fileWriting fileOperations = new fileWriting();
     private int incorrectCount = 0;
 
-    public static final int LOGIN_SUCCESS = 1;
-    public static final int LOGIN_FAILURE = 0;
-    public static final int LOGIN_FORGOT = -1;
-
-    public int handleLogin(Scanner scanner) {
+    public UserInfo handleLogin(Scanner scanner) {
 
         while (incorrectCount < 5) {
 
-            int result = login(scanner);
+            UserInfo user = login(scanner);
 
-            if (result == LOGIN_SUCCESS) {
-                return LOGIN_SUCCESS;
-            }
-
-            if (result == LOGIN_FORGOT) {
-                return LOGIN_FORGOT;
+            if (user != null) {
+                return user;
             }
         }
 
         System.out.println("\nFatal: too many incorrect passwords");
         System.exit(0);
-        return -99;
+        return null;
     }
 
-    private int login(Scanner scanner) {
+    private UserInfo login(Scanner scanner) {
 
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
@@ -36,12 +28,12 @@ public class LoginService {
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        if (username.equals(UserInfo.getAccountName()) &&
-            UserInfo.validatePassword(password)) {
+        UserInfo user = fileOperations.loadUser(username, password);
 
+        if (user != null) {
             incorrectCount = 0;
             System.out.println("\nLogin successful.\n");
-            return LOGIN_SUCCESS;
+            return user;
         }
 
         incorrectCount++;
@@ -53,14 +45,14 @@ public class LoginService {
             String input = scanner.nextLine();
 
             if (input.equalsIgnoreCase("y")) {
-                return LOGIN_FORGOT;
+                forgotPassword();
+                incorrectCount = 0;
             }
         }
-
-        return LOGIN_FAILURE;
+        return null;
     }
 
-    public static String forgotPassword(){
-        return "forgot password method answer";
+    public static boolean forgotPassword(){
+        return false; //temp send false
     }
 }
