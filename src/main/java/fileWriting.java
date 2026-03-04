@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.logging.*;
-
+/*
+* OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
+* MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+*/
 public class fileWriting {
     private static final String USER_DIRECTORY = "users";
     private static final Logger logger = Logger.getLogger(fileWriting.class.getName());
