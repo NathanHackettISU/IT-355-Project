@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
+/*
+* OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
+* MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+*/
 public class BankingAccountCreation {
     //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
