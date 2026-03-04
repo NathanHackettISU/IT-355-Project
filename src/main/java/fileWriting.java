@@ -28,7 +28,7 @@ public class fileWriting {
         } catch (IOException e){
             // Rule 1 Start - FIO02 - Joey Pina
                 // catch and log the specific IOException from the file write failure.
-            // Rule 3 Start - ERR02 - Joey Pina
+            // Rule 5 Start - ERR02 - Joey Pina
                 //Logging is wrapped in its own try/catch so that a failure in the
                 // logging operation won't hide the original IOException but still throw regardless of logging succedding or not
             try {
@@ -39,7 +39,7 @@ public class fileWriting {
             }
             throw new RuntimeException("Failed to write user file for userId=" + userId, e);
             // Rule 1 End - FIO02 - Joey Pina
-            // Rule 3 End - ERR02 - Joey Pina
+            // Rule 5 End - ERR02 - Joey Pina
         }
 
     }

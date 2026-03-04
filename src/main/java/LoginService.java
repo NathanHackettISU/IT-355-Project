@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.logging.*;
 
 public class LoginService {
+    private static final Logger logger = Logger.getLogger(LoginService.class.getName());
     fileWriting fileOperations = new fileWriting();
     private int incorrectCount = 0;
 
@@ -28,7 +30,26 @@ public class LoginService {
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        UserInfo user = fileOperations.loadUser(username, password);
+        UserInfo user = null;
+
+        // Rule 6 Start - ERR00 - Joey Pina
+            // this rule ensures that the exception is not suppressed or 
+            // ignored otherwise if continued the program will run in a unstable state
+
+        try{
+            user = fileOperations.loadUser(username, password);
+        } catch (RuntimeException e){
+            try{
+                logger.log(Level.SEVERE, "Login system error for username=" + username + ": " + e.getMessage(), e);
+            } catch (Exception loggingFailure){
+                System.err.println("ERR02-J: Logging failure during login error handling.");
+                System.err.println("ERR02-J: Original exception: " + e.getMessage());
+            }
+            System.out.println("A system error occurred during login. Please try again later.");
+            return null;
+        }
+
+        // Rule 6 End - ERR00 - Joey Pina
 
         if (user != null) {
             incorrectCount = 0;
