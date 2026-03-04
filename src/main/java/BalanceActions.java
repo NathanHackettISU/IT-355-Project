@@ -113,12 +113,9 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-<<<<<<< HEAD
-            //VNA00,synchronization is used to make sure the updated value visible
-=======
             
+            //VNA00,synchronization is used to make sure the updated value visible
             boolean depositAccepted;
->>>>>>> origin/main
             synchronized (account) {
                 depositAccepted = account.recordTransaction(amount, Transaction.TransactionType.DEPOSIT);
                 if (depositAccepted){
@@ -151,12 +148,9 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-<<<<<<< HEAD
             //VNA00,synchronization is used to make sure the updated value visible
-=======
 
             boolean withdrawAccepted;
->>>>>>> origin/main
             synchronized (account) {
 
                 if (amount > account.getBalance()) {
