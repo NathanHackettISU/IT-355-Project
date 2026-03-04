@@ -1,4 +1,4 @@
-    // case 4 should be here
+    // case 2 should be here
     // user should be able to make a new account
     // determine the type of account, provide a banking account id, routing number, etc
 import java.util.List;
@@ -7,17 +7,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BankingAccountCreation {
-
+    //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
     private final Random random;
 
     public BankingAccountCreation() {
+        //MET05, constructor only initializes fields rather than calling overridable methods
         this.scanner = new Scanner(System.in);
         this.random = new Random();
     }
 
     public void createNewAccount(UserInfo user) {
-
+        //checks whether user is null. Rule EXP01
         if (user == null) {
             System.out.println("User not found.");
             return;
@@ -33,6 +34,7 @@ public class BankingAccountCreation {
         String choice = scanner.nextLine();
         String accountType;
 
+        //rule EXP03, uses .equals to compare instead of equality operators
         if ("1".equals(choice)) {
             accountType = "Checking";
         } else if ("2".equals(choice)) {
@@ -65,11 +67,11 @@ public class BankingAccountCreation {
         Account newAccount = new Account(generatedAccountName, initialDeposit);
 
         List<Account> accounts = user.getAccounts();
-
+        //checks whether account is null before it is used. Rule EXP01
         if (accounts == null) {
             accounts = new ArrayList<>();
         }
-
+        //VNA00,synchronization is used to make sure the updated value visible
         synchronized (accounts) {
             accounts.add(newAccount);
         }

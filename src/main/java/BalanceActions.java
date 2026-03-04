@@ -3,29 +3,30 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BalanceActions {
-
+    //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
 
     public BalanceActions() {
+                //MET05, constructor only initializes fields rather than calling overridable methods
         this.scanner = new Scanner(System.in);
     }
 
     public void showBalanceMenu(UserInfo user) {
-
+        //checks whether user is null. Rule EXP01
         if (user == null) {
             System.out.println("User not found.");
             return;
         }
 
         List<Account> accounts = user.getAccounts();
-
+        //checks whether account is null or empty. Rule EXP01
         if (accounts == null || accounts.isEmpty()) {
             System.out.println("No accounts available.");
             return;
         }
 
         Account selectedAccount = selectAccount(accounts);
-
+        //checks if selected acct is null before it is used. Rule EXP01
         if (selectedAccount == null) {
             return;
         }
@@ -43,6 +44,7 @@ public class BalanceActions {
 
             String choice = scanner.nextLine();
 
+            //rule EXP03, since choice is a string,.equals is used internally to compare strings
             switch (choice) {
 
                 case "1":
@@ -110,7 +112,7 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-
+            //VNA00,synchronization is used to make sure the updated value visible
             synchronized (account) {
                 account.setBalance(account.getBalance() + amount);
             }
@@ -135,7 +137,7 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-
+            //VNA00,synchronization is used to make sure the updated value visible
             synchronized (account) {
 
                 if (amount > account.getBalance()) {
