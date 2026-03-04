@@ -1,12 +1,30 @@
 {
-  "userId" : "JoeyPina9202Jpina",
+  "userId" : "joeypina9202Jpina",
   "username" : "Jpina",
-  "firstName" : "Joey",
-  "lastName" : "Pina",
+  "firstName" : "joey",
+  "lastName" : "pina",
   "email" : "jt.pina2002@gmail.com",
   "dob" : [ 2002, 9, 29 ],
   "password" : "test",
   "ssn" : "123456789",
   "pin" : "1111",
-  "accounts" : [ ]
+  "accounts" : [ {
+    "accountName" : "Checking-220975",
+    "balance" : 250.0,
+    "transactionHistory" : [ {
+      "amount" : 50.0,
+      "type" : "WITHDRAWAL",
+      "timestamp" : [ 2026, 3, 4, 3, 10, 41, 931425700 ],
+      "balanceAfter" : 50.0
+    }, {
+      "amount" : 100.0,
+      "type" : "DEPOSIT",
+      "timestamp" : [ 2026, 3, 4, 3, 11, 50, 219788400 ],
+      "balanceAfter" : 150.0
+    }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+  }, {
+    "accountName" : "Savings-571494",
+    "balance" : 1000.0,
+    "transactionHistory" : [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+  } ]
 }
