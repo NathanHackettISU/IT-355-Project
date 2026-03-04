@@ -42,7 +42,8 @@ public class Account {
     }
 
     public Transaction[] getTransactionHistory() {
-        return transactionHistory;
+        //Rule 5 OBJ13-J: Returns a clone of the array instead of directly returning the array
+        return transactionHistory.clone();
     }
 
     public void setTransactionHistory(Transaction[] transactionHistory) {
