@@ -11,6 +11,7 @@ public class banking_main {
         CreateAccount createAccount = new CreateAccount();
     
         boolean userLoggedIn = false;
+        UserInfo currentUser = null;
 
         while (true) {
 
@@ -35,15 +36,15 @@ public class banking_main {
                         return;
 
                     case 1:
-                        int result = auth.handleLogin(scanner);
+                        currentUser = auth.handleLogin(scanner);
 
-                        if (result == LoginService.LOGIN_SUCCESS) {
+                        if (currentUser != null) {
                             userLoggedIn = true;
                         }
 
-                        if (result == LoginService.LOGIN_FORGOT) {
+                        if (LoginService.forgotPassword()) {
                             System.out.println("forgot password call");
-                            LoginService.forgotPassword();
+                            LoginService.forgotPassword(); // this can be handled in a seperate file
                         }
                         break;
 
@@ -53,8 +54,14 @@ public class banking_main {
                         break;
 
                     case 3:
-                        System.out.println("create account call");
-                        int accountResult = createAccount.create();
+                        System.out.println("\n\n---- Creating Account ----\n\n");
+                        UserInfo newUser = createAccount.create();
+                        if (newUser != null){
+                            userLoggedIn = true;
+                            currentUser = newUser;
+                        } 
+                        else
+                            menuSelection = 1; // will route to login - false because account is already created
                         break;
                     case 4:
                         System.out.println("ADMIN: Jumped to logged in menu");
@@ -63,7 +70,10 @@ public class banking_main {
             } 
             
             else {
-                System.out.println("\n--- Account Menu ---");
+
+                System.out.println("\n\nWelcome " + currentUser.getFirstName() + " " + currentUser.getLastName());
+
+                System.out.println("--- Account Menu ---");
                 System.out.println("1. View Balance");
                 System.out.println("2. Deposit");
                 System.out.println("3. Withdraw");
