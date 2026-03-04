@@ -63,7 +63,8 @@ public class Account {
         private boolean isDuplicate(Transaction incoming) {
         Object[] incomingSignature = incoming.toSignature();
         for (Transaction existing : transactionHistory) {
-            if (existing == null) continue;
+            if (existing == null) 
+                continue;
             Object[] existingSignature = existing.toSignature();
             if (Arrays.equals(incomingSignature, existingSignature)) {
                 return true;
@@ -85,11 +86,11 @@ public class Account {
     public void printHistory() {
         System.out.println("\n--- Transaction History: " + accountName + " ---");
         boolean hasTransactions = false;
-        for (Transaction t : transactionHistory) {
-            if (t != null) {
-                System.out.println(t.getType() + " | $" + t.getAmount()
-                    + " | Balance after: $" + t.getBalanceAfter()
-                    + " | " + t.getTimestamp());
+        for (Transaction transaction : transactionHistory) {
+            if (transaction != null) {
+                System.out.println(transaction.getType() + " | $" + transaction.getAmount()
+                    + " | Balance after: $" + transaction.getBalanceAfter()
+                    + " | " + transaction.getTimestamp());
                 hasTransactions = true;
             }
         }
