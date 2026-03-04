@@ -9,8 +9,6 @@ public class banking_main {
 
         LoginService auth = new LoginService();
         CreateAccount createAccount = new CreateAccount();
-        BalanceActions balanceActions = new BalanceActions();
-        BankingAccountCreation bankingAccountCreation = new BankingAccountCreation();
     
         boolean userLoggedIn = false;
         UserInfo currentUser = null;
@@ -24,7 +22,6 @@ public class banking_main {
                 System.out.println("1. Login");
                 System.out.println("2. Forgot Password");
                 System.out.println("3. Create Account");
-                System.out.println("4. ADMIN: Jump to logged in menu");
                 System.out.println("0. Quit");
 
                 System.out.print("Entry: ");
@@ -65,9 +62,6 @@ public class banking_main {
                         else
                             menuSelection = 1; // will route to login - false because account is already created
                         break;
-                    case 4:
-                        System.out.println("ADMIN: Jumped to logged in menu");
-                        userLoggedIn = true;
                 }
             } 
             
@@ -76,10 +70,12 @@ public class banking_main {
                 System.out.println("\n\nWelcome " + currentUser.getFirstName() + " " + currentUser.getLastName());
 
                 System.out.println("--- Account Menu ---");
-                System.out.println("1. Balance & Transactions");
-                System.out.println("2. Create New Account");
-                System.out.println("3. View Loans");
-                System.out.println("4. Log out");
+                System.out.println("1. View Balance");
+                System.out.println("2. Deposit");
+                System.out.println("3. Withdraw");
+                System.out.println("4. Create New  Account");
+                System.out.println("5. View Loans");
+                System.out.println("6. Log out");
 
 
                 menuSelection = scanner.nextInt();
@@ -88,20 +84,26 @@ public class banking_main {
                 switch (menuSelection) {
 
                     case 1:
-                        //view balance actions
-                        balanceActions.showBalanceMenu(currentUser);
+                        System.out.println("balance display here");
                         break;
 
                     case 2:
-                        //create new bank account
-                        bankingAccountCreation.createNewAccount(currentUser);
+                        System.out.println("deposit");
                         break;
 
                     case 3:
-                        System.out.println("loan(s) menu");
+                        System.out.println("withdraw");
                         break;
 
                     case 4:
+                        System.out.println("create new account");
+                        break;
+
+                    case 5:
+                        System.out.println("loan(s) menu");
+                        break;
+
+                    case 6:
                         userLoggedIn = false;
                         System.out.println("Logged out.");
                         break;

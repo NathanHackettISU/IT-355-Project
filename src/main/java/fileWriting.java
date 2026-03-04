@@ -3,15 +3,11 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.logging.*;
 
 public class fileWriting {
     private static final String USER_DIRECTORY = "users";
-    // in here we will be able to write to a file to save
-        // user information
-            // see UserInfo file
-            // save user's balance info
-            // loan info
-            // etc.
+    private static final Logger logger = Logger.getLogger(fileWriting.class.getName());
 
     public UserInfo accountCreationSuccess(String userId, String username, String firstName, String lastName, String email, LocalDate dob, String password, String ssn, String pin){
         try{
@@ -24,15 +20,33 @@ public class fileWriting {
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(USER_DIRECTORY + "/" + userId + ".json"), userInfo);
             return userInfo;
         } catch (IOException e){
-            System.out.println("Issue writing user file");
-            return null;
+            // Rule 1 Start - FIO02 - Joey Pina
+                // catch and log the specific IOException from the file write failure.
+            // Rule 5 Start - ERR02 - Joey Pina
+                //Logging is wrapped in its own try/catch so that a failure in the
+                // logging operation won't hide the original IOException but still throw regardless of logging succedding or not
+            try {
+                logger.log(Level.SEVERE, "Failed to write user file for userId=" + userId + ": " + e.getMessage(), e);
+            } catch (Exception loggingFailure) {
+                System.err.println("ERR02-J: Logging failure — original error: Failed to write user file for userId=" + userId);
+                System.err.println("ERR02-J: Original exception: " + e.getMessage());
+            }
+            throw new RuntimeException("Failed to write user file for userId=" + userId, e);
+            // Rule 1 End - FIO02 - Joey Pina
+            // Rule 5 End - ERR02 - Joey Pina
         }
 
     }
 
     public boolean duplicateAccountFile(String userId){
-        File userFile = new File(USER_DIRECTORY + "/" + userId + ".json");
-        return userFile.exists();
+        try{
+            File userFile = new File(USER_DIRECTORY + "/" + userId + ".json");
+            return userFile.exists();
+        } catch (SecurityException e){
+            logger.log(Level.SEVERE, "Permission denied checking existence of user file for userId=" + userId, e);
+            throw new RuntimeException("Unable to check for duplicate account file for userId=" + userId, e);
+        }
+
     }
 
     public UserInfo loadUser(String username, String password){
@@ -57,5 +71,22 @@ public class fileWriting {
             //return false;
         }
         return null;
+    }
+
+    public void saveUser(UserInfo user) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.findAndRegisterModules();
+            mapper.writerWithDefaultPrettyPrinter()
+                  .writeValue(new File(USER_DIRECTORY + "/" + user.getUserId() + ".json"), user);
+        } catch (IOException e) {
+            try {
+                logger.log(Level.SEVERE, "Failed to save user file for userId=" + user.getUserId() + ": " + e.getMessage(), e);
+            } catch (Exception loggingFailure) {
+                System.err.println("ERR02-J: Logging failure - original error: Failed to save user for userId=" + user.getUserId());
+                System.err.println("ERR02-J: Original exception: " + e.getMessage());
+            }
+            throw new RuntimeException("Failed to save user file for userId=" + user.getUserId(), e);
+        }
     }
 }

@@ -10,6 +10,7 @@ public class BankingAccountCreation {
     //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
     private final Random random;
+    private final fileWriting fileOperations = new fileWriting();
 
     public BankingAccountCreation() {
         //MET05, constructor only initializes fields rather than calling overridable methods
@@ -76,6 +77,7 @@ public class BankingAccountCreation {
             accounts.add(newAccount);
         }
 
+        fileOperations.saveUser(user);
         System.out.println("Account successfully created!");
         System.out.println("Account Name: " + newAccount.getAccountName());
         System.out.println("Starting Balance: $" + newAccount.getBalance());

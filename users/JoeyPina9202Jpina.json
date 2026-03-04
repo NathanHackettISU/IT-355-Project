@@ -1,12 +1,31 @@
 {
-  "userId" : "JoeyPina9202Jpina",
+  "userId" : "joeypina9202Jpina",
   "username" : "Jpina",
-  "firstName" : "Joey",
-  "lastName" : "Pina",
+  "firstName" : "joey",
+  "lastName" : "pina",
   "email" : "jt.pina2002@gmail.com",
   "dob" : [ 2002, 9, 29 ],
   "password" : "test",
   "ssn" : "123456789",
   "pin" : "1111",
-  "accounts" : [ ]
+  "accounts" : [ {
+    "accountName" : "Checking-598462",
+    "balance" : 130.0,
+    "transactionHistory" : [ {
+      "amount" : 100.0,
+      "type" : "DEPOSIT",
+      "timestamp" : [ 2026, 3, 4, 11, 36, 52, 322151000 ],
+      "balanceAfter" : 100.0
+    }, {
+      "amount" : 50.0,
+      "type" : "WITHDRAWAL",
+      "timestamp" : [ 2026, 3, 4, 11, 37, 7, 346335800 ],
+      "balanceAfter" : 200.0
+    }, {
+      "amount" : 20.0,
+      "type" : "WITHDRAWAL",
+      "timestamp" : [ 2026, 3, 4, 11, 39, 16, 582082000 ],
+      "balanceAfter" : 150.0
+    }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+  } ]
 }

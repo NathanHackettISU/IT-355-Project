@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class BalanceActions {
     //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
+    private final fileWriting fileOperations = new fileWriting();
 
     public BalanceActions() {
                 //MET05, constructor only initializes fields rather than calling overridable methods
@@ -52,11 +53,11 @@ public class BalanceActions {
                     break;
 
                 case "2":
-                    deposit(selectedAccount);
+                    deposit(selectedAccount, user);
                     break;
 
                 case "3":
-                    withdraw(selectedAccount);
+                    withdraw(selectedAccount, user);
                     break;
 
                 case "4":
@@ -100,7 +101,7 @@ public class BalanceActions {
         System.out.println("Current Balance: $" + account.getBalance());
     }
 
-    private void deposit(Account account) {
+    private void deposit(Account account, UserInfo user) {
 
         System.out.print("Enter deposit amount: ");
         String input = scanner.nextLine();
@@ -112,20 +113,33 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
+<<<<<<< HEAD
             //VNA00,synchronization is used to make sure the updated value visible
+=======
+            
+            boolean depositAccepted;
+>>>>>>> origin/main
             synchronized (account) {
-                account.setBalance(account.getBalance() + amount);
+                depositAccepted = account.recordTransaction(amount, Transaction.TransactionType.DEPOSIT);
+                if (depositAccepted){
+                    account.setBalance(account.getBalance() + amount);
+                }
+            }
+
+            if (!depositAccepted){
+                return;
             }
 
             System.out.println("Deposit successful.");
             System.out.println("New Balance: $" + account.getBalance());
+            fileOperations.saveUser(user);
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount.");
         }
     }
 
-    private void withdraw(Account account) {
+    private void withdraw(Account account, UserInfo user) {
 
         System.out.print("Enter withdrawal amount: ");
         String input = scanner.nextLine();
@@ -137,7 +151,12 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
+<<<<<<< HEAD
             //VNA00,synchronization is used to make sure the updated value visible
+=======
+
+            boolean withdrawAccepted;
+>>>>>>> origin/main
             synchronized (account) {
 
                 if (amount > account.getBalance()) {
@@ -145,11 +164,19 @@ public class BalanceActions {
                     return;
                 }
 
-                account.setBalance(account.getBalance() - amount);
+                withdrawAccepted  = account.recordTransaction(amount, Transaction.TransactionType.WITHDRAWAL);
+                if (withdrawAccepted){
+                    account.setBalance(account.getBalance() - amount);
+                }
+            }
+
+            if (!withdrawAccepted){
+                return;
             }
 
             System.out.println("Withdrawal successful.");
             System.out.println("New Balance: $" + account.getBalance());
+            fileOperations.saveUser(user);
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount.");
