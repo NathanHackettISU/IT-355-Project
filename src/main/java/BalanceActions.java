@@ -111,10 +111,17 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-
+            
+            boolean depositAccepted;
             synchronized (account) {
-                account.setBalance(account.getBalance() + amount);
-                account.recordTransaction(amount, Transaction.TransactionType.DEPOSIT);
+                depositAccepted = account.recordTransaction(amount, Transaction.TransactionType.DEPOSIT);
+                if (depositAccepted){
+                    account.setBalance(account.getBalance() + amount);
+                }
+            }
+
+            if (!depositAccepted){
+                return;
             }
 
             System.out.println("Deposit successful.");
@@ -139,6 +146,7 @@ public class BalanceActions {
                 return;
             }
 
+            boolean withdrawAccepted;
             synchronized (account) {
 
                 if (amount > account.getBalance()) {
@@ -146,8 +154,14 @@ public class BalanceActions {
                     return;
                 }
 
-                account.setBalance(account.getBalance() - amount);
-                account.recordTransaction(amount, Transaction.TransactionType.WITHDRAWAL);
+                withdrawAccepted  = account.recordTransaction(amount, Transaction.TransactionType.WITHDRAWAL);
+                if (withdrawAccepted){
+                    account.setBalance(account.getBalance() - amount);
+                }
+            }
+
+            if (!withdrawAccepted){
+                return;
             }
 
             System.out.println("Withdrawal successful.");

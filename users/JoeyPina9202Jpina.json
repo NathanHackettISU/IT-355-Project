@@ -9,22 +9,23 @@
   "ssn" : "123456789",
   "pin" : "1111",
   "accounts" : [ {
-    "accountName" : "Checking-220975",
-    "balance" : 250.0,
+    "accountName" : "Checking-598462",
+    "balance" : 130.0,
     "transactionHistory" : [ {
-      "amount" : 50.0,
-      "type" : "WITHDRAWAL",
-      "timestamp" : [ 2026, 3, 4, 3, 10, 41, 931425700 ],
-      "balanceAfter" : 50.0
-    }, {
       "amount" : 100.0,
       "type" : "DEPOSIT",
-      "timestamp" : [ 2026, 3, 4, 3, 11, 50, 219788400 ],
+      "timestamp" : [ 2026, 3, 4, 11, 36, 52, 322151000 ],
+      "balanceAfter" : 100.0
+    }, {
+      "amount" : 50.0,
+      "type" : "WITHDRAWAL",
+      "timestamp" : [ 2026, 3, 4, 11, 37, 7, 346335800 ],
+      "balanceAfter" : 200.0
+    }, {
+      "amount" : 20.0,
+      "type" : "WITHDRAWAL",
+      "timestamp" : [ 2026, 3, 4, 11, 39, 16, 582082000 ],
       "balanceAfter" : 150.0
-    }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
-  }, {
-    "accountName" : "Savings-571494",
-    "balance" : 1000.0,
-    "transactionHistory" : [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+    }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
   } ]
 }
