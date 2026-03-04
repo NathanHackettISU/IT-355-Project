@@ -9,6 +9,8 @@ public class banking_main {
 
         LoginService auth = new LoginService();
         CreateAccount createAccount = new CreateAccount();
+        BalanceActions balanceActions = new BalanceActions();
+        BankingAccountCreation bankingAccountCreation = new BankingAccountCreation();
     
         boolean userLoggedIn = false;
         UserInfo currentUser = null;
@@ -70,12 +72,11 @@ public class banking_main {
                 System.out.println("\n\nWelcome " + currentUser.getFirstName() + " " + currentUser.getLastName());
 
                 System.out.println("--- Account Menu ---");
-                System.out.println("1. View Balance");
-                System.out.println("2. Deposit");
-                System.out.println("3. Withdraw");
-                System.out.println("4. Create New  Account");
-                System.out.println("5. View Loans");
-                System.out.println("6. Log out");
+                System.out.println("1. Balance & Transactions");
+                System.out.println("2. Create New Account");
+                System.out.println("3. View Loans");
+                System.out.println("4. Log out");
+
 
 
                 menuSelection = scanner.nextInt();
@@ -84,26 +85,19 @@ public class banking_main {
                 switch (menuSelection) {
 
                     case 1:
-                        System.out.println("balance display here");
+                        //view balance actions
+                        balanceActions.showBalanceMenu(currentUser);
                         break;
 
                     case 2:
-                        System.out.println("deposit");
+                        //create new bank account
+                        bankingAccountCreation.createNewAccount(currentUser);
                         break;
-
                     case 3:
-                        System.out.println("withdraw");
-                        break;
-
-                    case 4:
-                        System.out.println("create new account");
-                        break;
-
-                    case 5:
                         System.out.println("loan(s) menu");
                         break;
 
-                    case 6:
+                    case 4:
                         userLoggedIn = false;
                         System.out.println("Logged out.");
                         break;
