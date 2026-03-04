@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/*
+* OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
+* MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+*/
 public class banking_main {
 
     private static int menuSelection = 0;
