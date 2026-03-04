@@ -1,9 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.logging.*;
 
 public class CreateAccount {
-
+    private static final Logger logger = Logger.getLogger(CreateAccount.class.getName());
     fileWriting fileOperations = new fileWriting();
 
     public UserInfo create(){
@@ -14,9 +15,19 @@ public class CreateAccount {
         String firstName = nonEmptyStringCheck(userInput, "Provide your first name: ");
         String lastName = nonEmptyStringCheck(userInput, "Provide your last name: ");
         LocalDate dob = nonEmptyDateCheck(userInput, dateFormatting);
-
+        String userId;
+        // Rule 2 Start - ERRO8 - Joey Pina
         // Test here if the account was already craeted
-        String userId = uniqueUserIdCreation(username, firstName, lastName, dob);
+        try{
+            userId = uniqueUserIdCreation(username, firstName, lastName, dob);
+        } catch (RuntimeException e){
+            logger.log(Level.SEVERE, "Failed to verify account uniqueness: " + e.getMessage(), e);
+            System.out.println("Account verification failed due to a system error. Please try again.");
+            return null;
+        }
+        // Rule 2 End - ERR08 - Joey Pina
+
+
         if (userId == null){
             System.out.println("\nAccount already exists.\tRouting to login");
             return null;
