@@ -8,12 +8,6 @@ import java.util.logging.*;
 public class fileWriting {
     private static final String USER_DIRECTORY = "users";
     private static final Logger logger = Logger.getLogger(fileWriting.class.getName());
-    // in here we will be able to write to a file to save
-        // user information
-            // see UserInfo file
-            // save user's balance info
-            // loan info
-            // etc.
 
     public UserInfo accountCreationSuccess(String userId, String username, String firstName, String lastName, String email, LocalDate dob, String password, String ssn, String pin){
         try{
@@ -77,5 +71,22 @@ public class fileWriting {
             //return false;
         }
         return null;
+    }
+
+    public void saveUser(UserInfo user) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.findAndRegisterModules();
+            mapper.writerWithDefaultPrettyPrinter()
+                  .writeValue(new File(USER_DIRECTORY + "/" + user.getUserId() + ".json"), user);
+        } catch (IOException e) {
+            try {
+                logger.log(Level.SEVERE, "Failed to save user file for userId=" + user.getUserId() + ": " + e.getMessage(), e);
+            } catch (Exception loggingFailure) {
+                System.err.println("ERR02-J: Logging failure - original error: Failed to save user for userId=" + user.getUserId());
+                System.err.println("ERR02-J: Original exception: " + e.getMessage());
+            }
+            throw new RuntimeException("Failed to save user file for userId=" + user.getUserId(), e);
+        }
     }
 }

@@ -10,6 +10,7 @@ public class BankingAccountCreation {
 
     private final Scanner scanner;
     private final Random random;
+    private final fileWriting fileOperations = new fileWriting();
 
     public BankingAccountCreation() {
         this.scanner = new Scanner(System.in);
@@ -74,6 +75,7 @@ public class BankingAccountCreation {
             accounts.add(newAccount);
         }
 
+        fileOperations.saveUser(user);
         System.out.println("Account successfully created!");
         System.out.println("Account Name: " + newAccount.getAccountName());
         System.out.println("Starting Balance: $" + newAccount.getBalance());

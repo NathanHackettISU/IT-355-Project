@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class BalanceActions {
 
     private final Scanner scanner;
+    private final fileWriting fileOperations = new fileWriting();
 
     public BalanceActions() {
         this.scanner = new Scanner(System.in);
@@ -50,11 +51,11 @@ public class BalanceActions {
                     break;
 
                 case "2":
-                    deposit(selectedAccount);
+                    deposit(selectedAccount, user);
                     break;
 
                 case "3":
-                    withdraw(selectedAccount);
+                    withdraw(selectedAccount, user);
                     break;
 
                 case "4":
@@ -98,7 +99,7 @@ public class BalanceActions {
         System.out.println("Current Balance: $" + account.getBalance());
     }
 
-    private void deposit(Account account) {
+    private void deposit(Account account, UserInfo user) {
 
         System.out.print("Enter deposit amount: ");
         String input = scanner.nextLine();
@@ -113,17 +114,19 @@ public class BalanceActions {
 
             synchronized (account) {
                 account.setBalance(account.getBalance() + amount);
+                account.recordTransaction(amount, Transaction.TransactionType.DEPOSIT);
             }
 
             System.out.println("Deposit successful.");
             System.out.println("New Balance: $" + account.getBalance());
+            fileOperations.saveUser(user);
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount.");
         }
     }
 
-    private void withdraw(Account account) {
+    private void withdraw(Account account, UserInfo user) {
 
         System.out.print("Enter withdrawal amount: ");
         String input = scanner.nextLine();
@@ -144,10 +147,12 @@ public class BalanceActions {
                 }
 
                 account.setBalance(account.getBalance() - amount);
+                account.recordTransaction(amount, Transaction.TransactionType.WITHDRAWAL);
             }
 
             System.out.println("Withdrawal successful.");
             System.out.println("New Balance: $" + account.getBalance());
+            fileOperations.saveUser(user);
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount.");
