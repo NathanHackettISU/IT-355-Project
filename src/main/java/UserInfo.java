@@ -3,18 +3,29 @@ import java.util.List;
 
 public class UserInfo {
 
-    private String userId;
-    private String username;
+    // Rule 4 Start - MET11 - Joey Pina
+        // username, userId, and dob have been made final since these cannot be reassigned after it's constructed. 
+        // Since that these are the key fields for the object userId - if they were reassignable then comparison would break
+        // like when we are seeing if their file / account already exists. 
+    private final String userId;
+    private final String username;
     private String firstName;
     private String lastName;
     private String email;
-    private LocalDate dob;
+    private final LocalDate dob;
     private String password; 
     private String ssn;
     private String pin;
     private List<Account> accounts;
 
-    public UserInfo() {} // Required for Jackson library
+    // Required for Jackson library
+    public UserInfo() {
+        this.userId = null;
+        this.username = null;
+        this.dob = null;
+    }
+
+    // Rule 4 End - MET11 - Joey Pina
 
     public UserInfo(String userId, String username, 
                     String firstName, String lastName,

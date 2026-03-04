@@ -17,6 +17,7 @@ public class CreateAccount {
         LocalDate dob = nonEmptyDateCheck(userInput, dateFormatting);
         String userId;
         // Rule 2 Start - ERRO8 - Joey Pina
+            // log the issue and return null to avoid throwing NullPointerException and it's ancestors.
         // Test here if the account was already craeted
         try{
             userId = uniqueUserIdCreation(username, firstName, lastName, dob);
