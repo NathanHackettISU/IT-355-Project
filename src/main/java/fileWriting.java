@@ -66,10 +66,17 @@ public class fileWriting {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            //return false;
+        } 
+        catch (IOException e) {
+            //Rule 7 - ERR01-J - Devin Diaz
+            //Exception messages may expose implementation details to the user, so provide a general message
+            //Recommendation 7 - ERR53-J - Devin Diaz
+            //Gracefully recover from system errors instead of allowing the program to terminate unexpectedly
+            System.out.println("An error occurred while loading user data. Try again later.");
+
+            return null;
         }
+
         return null;
     }
 
