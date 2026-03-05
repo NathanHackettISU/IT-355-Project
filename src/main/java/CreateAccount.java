@@ -43,6 +43,8 @@ public class CreateAccount {
         return fileOperations.accountCreationSuccess(userId, username, firstName, lastName, email, dob, password, ssn, pin);
     }
 
+    //Recommendation 5 - OBJ54-J - Devin Diaz
+    //Local variables are allowed to go out of scope naturally
     private String uniqueUserIdCreation(String username, String firstName, String lastName, LocalDate dob){
         // pulling apart dob to create unqiue userId
         int month = dob.getMonthValue();
