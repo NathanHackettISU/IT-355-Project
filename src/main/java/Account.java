@@ -8,12 +8,18 @@ public class Account {
     private Transaction[] transactionHistory;
     private static final int MAX_TRANSACTIONS = 100;
 
+    //Rule 9 - LCK01-J - Devin Diaz
+    //Private lock object prevents synchronization on reusable objects
+    private final Object lock = new Object();
+
     public Account() {
         this.transactionHistory = new Transaction[MAX_TRANSACTIONS];
     }
 
     public Account(String accountName, double balance){
-
+        
+        //Rule 6 - MET00-J - Devin Diaz
+        //Validate method arguments before using them
         if (accountName == null || accountName.trim().isEmpty()) {
             throw new IllegalArgumentException("Account name cannot be null or empty.");
         }
@@ -30,15 +36,20 @@ public class Account {
         return accountName;
     }
 
-    public synchronized double getBalance() {
-        return balance;
+    public double getBalance() {
+        synchronized(lock) {
+            return balance;
+        }
     }
 
-    public synchronized void setBalance(double balance) {
+    public void setBalance(double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative.");
         }
-        this.balance = balance;
+        
+        synchronized(lock) {
+            this.balance = balance;
+        }
     }
 
     public Transaction[] getTransactionHistory() {
@@ -49,18 +60,21 @@ public class Account {
         this.transactionHistory = transactionHistory;
     }
 
-    public synchronized boolean recordTransaction(double amount, Transaction.TransactionType type) {
-        Transaction incoming = new Transaction(amount, type, LocalDateTime.now(), balance);
+    public boolean recordTransaction(double amount, Transaction.TransactionType type) {
+        synchronized(lock) {
+            Transaction incoming = new Transaction(amount, type, LocalDateTime.now(), balance);
 
-        if (isDuplicate(incoming)) {
-            System.out.println("Duplicate transaction detected. Action rejected.");
-            return false;
+            if (isDuplicate(incoming)) {
+                System.out.println("Duplicate transaction detected. Action rejected.");
+                return false;
+            }
+
+            addTransaction(incoming);
+            return true;
         }
-
-        addTransaction(incoming);
-        return true;
     }
-        private boolean isDuplicate(Transaction incoming) {
+    
+    private boolean isDuplicate(Transaction incoming) {
         Object[] incomingSignature = incoming.toSignature();
         for (Transaction existing : transactionHistory) {
             if (existing == null) 
